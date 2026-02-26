@@ -3,6 +3,8 @@ package org.example;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class InventoryManager {
 
@@ -12,6 +14,8 @@ public class InventoryManager {
     private List<Order> orders;
     private List<PurchasedOrder> purchasedOrders;
     private List<Stock> stocks;
+
+    private static final Logger logger = Logger.getLogger(InventoryManager.class.getName());
 
     public InventoryManager() {
         suppliers = new ArrayList<>();
@@ -63,9 +67,11 @@ public class InventoryManager {
     }
 
     public void showStock() {
-        System.out.println("CURRENT STOCK:");
+        logger.info("CURRENT STOCK:");
         for (Stock s : stocks) {
-            System.out.println(s);
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info(s.toString());
+            }
         }
     }
 
@@ -100,7 +106,9 @@ public class InventoryManager {
 
     public void showAllOrders(){
         for(Order order : orders){
-            System.out.println(order);
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info(order.toString());
+            }
         }
     }
 }
